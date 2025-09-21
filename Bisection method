@@ -1,0 +1,44 @@
+#include <stdio.h>
+#include <math.h>
+int main() {
+    float a,b,r,i=0,N,E,app_root,error,fa,fb,fr;
+    printf("enter two numbers: ");
+    scanf("%f %f",&a,&b);
+    fa=(a*a*a*a*a)-(64*a)+30;
+    fb=(b*b*b*b*b)-(64*b)+30;
+    app_root=b;
+    r=(a+b)/2;
+    error=fabs(app_root-r)/fabs(r);
+    printf("enter the number of digits for approximation: ");
+    scanf("%f",&E);
+    printf("max no. of iterations: ");
+    scanf("%f",&N);
+    while (error>=E && i<=N)
+    {
+     fr=(r*r*r*r*r)-(64*r)+30;
+     if((fa*fr)<0)
+     {
+      b=r;
+      fb=fr;
+     }
+    else
+    {
+    a=r;
+    fa=fr;
+    }
+  app_root=r;
+  i=i+1;
+  r=(a+b)/2;
+  error=fabs(app_root-r)/fabs(r);
+  }
+  printf("no. of iterations= %f\n", i);
+ if(i>N)
+ {
+     printf("ERROR: Root not found within iteration limit.\n");
+ }
+ else
+ {
+     printf("The approximate value of root is: %f",r);
+ }
+ return 0;
+ }
