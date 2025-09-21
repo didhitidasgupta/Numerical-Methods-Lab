@@ -1,0 +1,34 @@
+#include <stdio.h>
+#include <math.h>
+
+int main() {
+    float a, r, error, E;
+    int i = 0, N;
+    printf("Enter initial guess: ");
+    scanf("%f", &a);
+    printf("Enter tolerance limit: ");
+    scanf("%f", &E);
+    printf("Enter maximum iterations: ");
+    scanf("%d", &N);
+
+    error = 1.0;
+
+    while (error >= E && i <= N) {
+        float fa = (a * a) - 0.1; 
+        float fpa = 2 * a; 
+        r = a - (fa / fpa); 
+
+        error = fabs((a - r) / r); 
+        a = r; 
+        i = i + 1;
+    }
+
+    if (i > N) {
+        printf("ERROR: Root not found within iteration limit.\n");
+    } else {
+        printf("Approximate value of 1/sqrt(10): %.4f\n", r);  
+        printf("Number of iterations: %d\n", i);
+    }
+
+    return 0;
+}
