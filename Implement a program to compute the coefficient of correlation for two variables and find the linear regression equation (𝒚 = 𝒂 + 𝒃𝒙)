@@ -1,0 +1,53 @@
+ #include <stdio.h>
+#include <math.h>
+
+int main() {
+    int n = 6;
+    double T[] = {-50, -30, 0, 60, 90, 110}; // Independent variable (Temperature)
+    double c[] = {1250, 1280, 1350, 1480, 1580, 1700}; // Dependent variable (Heat capacity)
+    double sumx = 0, sumy = 0, sumx2 = 0, sumy2 = 0, sumxy = 0;
+    double cov, varx, vary, r, a, b;
+    int i;
+
+    printf("\nGiven Data:\n");
+    printf("T (Temperature): -50, -30, 0, 60, 90, 110\n");
+    printf("c (Heat Capacity): 1250, 1280, 1350, 1480, 1580, 1700\n");
+
+    // Step 1: Calculate summations
+    for (i = 0; i < n; i++) {
+        sumx += T[i];
+        sumy += c[i];
+        sumx2 += T[i] * T[i];
+        sumy2 += c[i] * c[i];
+        sumxy += T[i] * c[i];
+    }
+
+    // Step 2: Compute covariance and variances
+    cov = n * sumxy - sumx * sumy;
+    varx = n * sumx2 - (sumx * sumx);
+    vary = n * sumy2 - (sumy * sumy);
+
+    // Step 3: Calculate correlation and regression coefficients
+    r = cov / sqrt(varx * vary);
+    b = cov / varx;
+    a = (sumy - b * sumx) / n;
+
+    // Step 4: Display results
+    printf("\nRESULTS:\n");
+    printf("Correlation Coefficient (r): %.4f\n", r);
+    printf("Regression Coefficients:\n");
+    printf(" a (Intercept) = %.4f\n", a);
+    printf(" b (Slope) = %.4f\n", b);
+    printf("\nRegression Equation: c = %.4f + %.4f * T\n", a, b);
+
+    // Step 5: Predictions for given values
+    double T1 = -60, T2 = 150;
+    double c1 = a + b * T1;
+    double c2 = a + b * T2;
+
+    printf("\nPREDICTED VALUES:\n");
+    printf("For T = -60, c = %.4f\n", c1);
+    printf("For T = 150, c = %.4f\n", c2);
+
+    return 0;
+}
