@@ -1,0 +1,26 @@
+#include <stdio.h>
+#include <math.h>
+
+float f(float x) {
+    return (400*pow(x,5) - 900*pow(x,4) + 675*pow(x,3) - 200*pow(x,2) + 25*x + 0.2);
+}
+
+int main() {
+    float a = 0, b = 1; 
+    float h = 0.05;     
+    int n = (b - a) / h;
+    float inte_val = 0.0;
+    int i;
+    for (i = 0; i <= n; i++) {
+        float x = a + i * h;
+        if (i == 0 || i == n)
+            inte_val += f(x);
+        else
+            inte_val += 2 * f(x);
+    }
+
+    inte_val = (h * inte_val) / 2.0;
+
+    printf("Integral value = %.5f\n", inte_val);
+    return 0;
+}
