@@ -1,0 +1,25 @@
+#include <stdio.h>
+
+int main() {
+    int n = 5;
+    float x[5] = {-1, -0.5, 0, 0.5, 1};
+    float y[5] = {-637, -96.5, 0, 96.5, 637};
+
+    float xp = -0.25;
+    float yp = 0;
+    float L;
+    int i, j;
+
+    for(i = 0; i < n; i++) {
+        L = 1.0;
+        for(j = 0; j < n; j++) {
+            if(i != j) {
+                L *= (xp - x[j]) / (x[i] - x[j]);
+            }
+        }
+        yp += L * y[i];
+    }
+
+    printf("Voltage at i = %.2f is %f V\n", xp, yp);
+    return 0;
+}
